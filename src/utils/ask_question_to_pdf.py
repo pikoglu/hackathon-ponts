@@ -77,6 +77,10 @@ def split_text(text, chunk_size=5000):
         chunks.append(current_chunk.getvalue())
     return chunks
 
+filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
+document = read_pdf(filename)
+chunks = split_text(document)
+
 def gpt3_completion(prompt, max_tokens=500, temperature=0.7):
 
     # Utilisez la méthode 'openai.Completion.create()' pour générer une complétion.
@@ -97,7 +101,7 @@ text = "Ancien élève de la promotion 1979 de l'École polytechnique1, Luc Dorm
 
 def ask_question_to_pdf(question):
     # Concaténez la question avec le texte d'introduction
-    prompt = text + "\n\n" + question
+    prompt = document + "\n\n" + question
 
     # Appelez la fonction gpt3_completion avec la question complète
     response = gpt3_completion(prompt)
@@ -118,6 +122,3 @@ completion = ask_question_to_pdf(question)
 print(completion)
 
 
-filename = os.path.join(os.path.dirname(__file__), "filename.pdf")
-document = read_pdf(filename)
-chunks = split_text(document)
