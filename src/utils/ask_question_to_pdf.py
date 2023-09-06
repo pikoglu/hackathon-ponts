@@ -77,7 +77,7 @@ def split_text(text, chunk_size=5000):
         chunks.append(current_chunk.getvalue())
     return chunks
 
-def gpt3_completion(prompt, max_tokens=500, temperature=0.7):
+def gpt3_completion(prompt, max_tokens=500, temperature=0.4):
 
     # Utilisez la méthode 'openai.Completion.create()' pour générer une complétion.
     response = openai.Completion.create(
