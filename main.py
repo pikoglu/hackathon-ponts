@@ -11,20 +11,20 @@ def hello_world():
 def prompt():
     question = request.form["prompt"]
     answer = gpt3_completion(f"Répondez de manière concise à la question suivante : {question}")
-    return jsonify({'answer': answer})
+    return {'answer': answer}
 
 @app.route("/question", methods=['GET'])
 def question():
     prompt = "Génère une question pertinente basée sur le texte suivant : "
     question = ask_question_to_pdf(prompt)
-    return jsonify({'answer': answer})
+    return {'answer': answer}
 
 @app.route("/answer", methods=['POST'])
 def answer():
     question = request.form["question"]
     user_answer = request.form["prompt"]
     answer = is_answer_correct(question, user_answer)
-    return jsonify({'answer': answer})
+    return {'answer': answer}
 
 
 def is_answer_correct(question, user_answer):
