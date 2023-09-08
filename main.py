@@ -26,7 +26,7 @@ def prompt():
 @app.route("/question", methods=["GET"])
 def question():
     question = "Genere en francais une seule question pertinente sur le texte"
-    user_answer = ask_question_to_pdf(question)
+    user_answer = ask_question_to_pdf(question, historique)
     print(user_answer)
     return {"answer": user_answer}
 
@@ -35,11 +35,15 @@ def question():
 def answer():
     question = request.form["question"]
     user_answer = request.form["prompt"]
-    reponse = is_answer_correct(question, user_answer)
-    return {"answer": reponse}
+    answer = is_answer_correct(question, user_answer)
+    conversation_history.append(question)
+    conversation_history.append(user_answer)
+    conversation_history.append(answer)
+    return {"answer": answer}
 
 
 def is_answer_correct(question, user_answer):
     evaluation_prompt = f"La question portant sur le texte était : {question}\n La réponse apportée : {user_answer}\n Si la réponse n'est pas correcte dis moi FAUX et donne moi une explication concise de la réponse correcte. \n Si la réponse est correcte dis moi VRAI et felicite moi "
-    response = ask_question_to_pdf(evaluation_prompt)
-    return response
+    answer = ask_question_to_pdf(evaluation_prompt, historique)
+    conversation_history.append(answer)
+    return answer
