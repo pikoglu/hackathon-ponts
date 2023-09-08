@@ -5,7 +5,6 @@
   <title>Mon A.I.de mémoire</title>
 
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}" id="dark-mode-stylesheet" />
 </head>
 
 <body>
@@ -26,16 +25,14 @@
 
       <input type="text" id="prompt" name="prompt" class="prompt-input" autocomplete="off" />
 
-      <button type="button" class="dark-mode-button" id="dark-mode-toggle" aria-label="Toggle Dark Mode">
-        Dark Mode
-      </button>
-
       <button type="submit" class="button" id="submit-button">Envoyer</button>
 
       <button type="button" class="button" id="question-button">
         Pose-moi une question !
       </button>
-
+      <button type="button" class="button" id="dark-mode">
+        Dark mode
+      </button>
     </form>
 
     <script src="{{ url_for('static', filename='prompt.js') }}"></script>

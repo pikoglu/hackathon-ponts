@@ -7,12 +7,12 @@ app = Flask(__name__)
 def hello_world():
      return render_template('index.html')
 
+
 @app.route("/prompt", methods=['POST'])
 def prompt():
     question = request.form["prompt"]
     reponse = gpt3_completion(question)
     return {'answer':reponse}
-
 
 @app.route("/question", methods=['GET'])
 def question():
@@ -29,6 +29,6 @@ def answer():
     return {'answer':reponse}
 
 def is_answer_correct(question, user_answer):
-    evaluation_prompt = f"La question portant sur le texte était : {question}\n La réponse apportée : {user_answer}\n Si la réponse n'est pas correcte dis moi FAUX et donne moi une explication concise de la réponse correcte. \n Si la réponse est correcte dis moi VRAI et felicite moi "
+    evaluation_prompt = f"J'avais la question suivante portant sur le texte : {question}\n Ma réponse est : {user_answer}\n Ma réponse est elle correcte ? Si OUI dis moi VRAI, SI NON explique moi pour que je comprenne mieux."
     response=ask_question_to_pdf(evaluation_prompt)
     return response
