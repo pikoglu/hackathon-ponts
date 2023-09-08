@@ -3,6 +3,10 @@ from flask import render_template, request
 from src.utils.ask_question_to_pdf import gpt3_completion,ask_question_to_pdf
 app = Flask(__name__)
 
+
+
+global souvenir="Voici ce sur quoi nos conversations précédentes ont porté :"
+
 @app.route("/")
 def hello_world():
      return render_template('index.html')
@@ -18,13 +22,14 @@ def prompt():
 def question():
     question = "Genere en francais une seule question pertinente sur le texte"
     user_answer = ask_question_to_pdf(question)
-    print(user_answer)
+    souvenir= souvenir + "\n Tu m'as posé cette question :"+ question 
     return {'answer':user_answer}
 
 @app.route("/answer", methods=['POST'])
 def answer():
     question = request.form["question"]
     user_answer = request.form["prompt"]
+    souvenir= souvenir + "\n J'ai répondu cela à ta question précédente :"+ reponse 
     reponse= is_answer_correct(question, user_answer)
     return {'answer':reponse}
 
