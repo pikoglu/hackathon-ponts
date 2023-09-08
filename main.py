@@ -4,13 +4,8 @@ from src.utils.ask_question_to_pdf import gpt3_completion, ask_question_to_pdf
 
 app = Flask(__name__)
 
-<<<<<<< Updated upstream
-# Global variable to store conversation history
-conversation_history = []
-=======
 # Variable d'historique de la conversation
 historique = []
->>>>>>> Stashed changes
 
 
 @app.route("/")
@@ -22,18 +17,10 @@ def hello_world():
 def prompt():
     global conversation_history
     question = request.form["prompt"]
-<<<<<<< Updated upstream
-    full_question = "\n".join(conversation_history) + "\n" + question
-    reponse = gpt3_completion(full_question)
-    conversation_history.append(question)
-    conversation_history.append(reponse)
-    return {"answer": reponse}
-=======
     answer = gpt3_completion(question, historique)
     conversation_history.append(question)
     conversation_history.append(answer)
     return {"answer": answer}
->>>>>>> Stashed changes
 
 
 @app.route("/question", methods=["GET"])

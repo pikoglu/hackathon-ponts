@@ -83,11 +83,14 @@ document = read_pdf(filename)
 chunks = split_text(document)
 
 
-#fonction gpt3_completion modifiée pour prendre en compte le contexte
+# fonction gpt3_completion modifiée pour prendre en compte le contexte
 def gpt3_completion(prompt, historique, max_tokens=500, temperature=0.2):
     response = openai.Completion.create(
         engine="text-davinci-002",
-        prompt="En t'aidant de cet historique : " + "\n".join(historique) + " répond en français et de manière concise à : " + prompt,
+        prompt="En t'aidant de cet historique : "
+        + "\n".join(historique)
+        + " répond en français et de manière concise à : "
+        + prompt,
         max_tokens=max_tokens,
         temperature=temperature,
     )
@@ -100,12 +103,12 @@ def gpt3_completion(prompt, historique, max_tokens=500, temperature=0.2):
 text = "Ancien élève de la promotion 1979 de l'École polytechnique1, Luc Dormieux intègre le Corps des ponts et chaussées et obtient un doctorat ès sciences physiques en mécanique à l'École nationale des ponts et chaussées en 1989, puis une habilitation à diriger des recherches lui permettant d'être directeur de thèse2. Il est professeur chargé de cours à l'École polytechnique, maître de conférences à l'École nationale des ponts et chaussées et directeur de recherche en mécanique des milieux continus au Laboratoire Navier3,4, au LMSGC5 et au Laboratoire central des ponts et chaussées, qui font partie intégrante de l'École nationale des ponts et chaussées."
 
 
-def ask_question_to_pdf(question):
+def ask_question_to_pdf(question, historique):
     # Concaténez la question avec le texte d'introduction
     prompt = text + "\n\n" + question
 
     # Appelez la fonction gpt3_completion avec la question complète
-    response = gpt3_completion(prompt)
+    response = gpt3_completion(prompt, historique)
 
     return response
 
