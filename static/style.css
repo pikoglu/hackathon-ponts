@@ -91,6 +91,20 @@ body {
   cursor: pointer;
 }
 
+.dark-mode-button {
+  width: 75px;
+  border: 1px solid var(--border-color);
+  padding: 5px;
+  border-radius: 5px;
+  background-color: var(--main-background-color);
+}
+
+.dark-mode-button:hover,
+.dark-mode-button:active {
+  background-color: var(--body-background-color);
+  cursor: pointer;
+}
+
 .hidden {
   display: none;
 }
