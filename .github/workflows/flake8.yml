@@ -1,0 +1,43 @@
+name: "Python flake8 Lint"
+description: "Logical and stylistic linting of Python source files with the flake8 package"
+inputs:
+  path: # id
+    description: "Path to source file or directory (default='.')"
+    required: false
+    default: "." # default path is the root of the source repository
+  update-pip: # id
+    description: "Boolean for pip upgrade prior to flake8 installation (default='false')"
+    required: false
+    default: "false" # options "true", "false"
+  ignore:
+    description: "Comma delimited list of ignored flake8 rule codes (optional)"
+    required: false
+    default: "none" # comma delimited list of ignored rule codes
+  exclude:
+    description: "Comma delimited list of excluded paths (optional)"
+    required: false
+    default: "none" # comma delimited list of paths
+  max-line-length:
+    description: "Integer value representing max acceptable line length (optional)"
+    required: false
+    default: "none" # integer value as a string
+  args:
+    description: "flake8 arguments for test execution (optional)"
+    required: false
+    default: "none" # integer value as a string
+  flake8-version:
+    description: "The flake8 version for tests (optional, default='latest')"
+    required: false
+    default: "latest" # possible values ['latest', 'master', 'main', '[VERSION NUMBER]']
+  plugins:
+    description: "List of flake8 plugins for pip installation prior to flake8 execution"
+    required: false
+    default: "none" # possible values ['[PACKAGE]', '[PACKAGE]==[VERSION NUMBER]']
+
+runs:
+  using: "node16"
+  main: "dist/index.js"
+
+branding:
+  icon: "terminal"
+  color: "blue"
