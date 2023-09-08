@@ -87,9 +87,8 @@ chunks = split_text(document)
 def gpt3_completion(prompt, historique, max_tokens=500, temperature=0.2):
     response = openai.Completion.create(
         engine="text-davinci-002",
-        prompt="En t'aidant de cet historique : "
-        + "\n".join(historique)
-        + " répond en français et de manière concise à : "
+        prompt="En t'aidant de cet historique : ".join(historique)
+        + " réagis en français et de manière concise à : "
         + prompt,
         max_tokens=max_tokens,
         temperature=temperature,
@@ -104,24 +103,8 @@ text = "Ancien élève de la promotion 1979 de l'École polytechnique1, Luc Dorm
 
 
 def ask_question_to_pdf(question, historique):
-    # Concaténez la question avec le texte d'introduction
-    prompt = text + "\n\n" + question
+    prompt = text + " " + question
 
-    # Appelez la fonction gpt3_completion avec la question complète
     response = gpt3_completion(prompt, historique)
 
     return response
-
-
-"""
-# Exemple d'utilisation de la fonction gpt3_completion
-prompt = "Raconte-moi une histoire sur les étoiles :"
-completion = gpt3_completion(prompt)
-print(completion)
-
-"""
-
-# Exemple d'utilisation de ask_question_to_pdf
-question = "De quoi parle le texte"
-completion = ask_question_to_pdf(question)
-print(completion)
